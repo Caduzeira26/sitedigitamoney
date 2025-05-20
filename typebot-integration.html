@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integração com Typebot - Digita Money</title>
+    <meta name="description" content="Código de integração do chatbot Typebot para o site da Digita Money.">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: #000000;
+            color: #FFFFFF;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #333333;
+            border-radius: 10px;
+        }
+        
+        h1 {
+            color: #00E5FF;
+            margin-bottom: 20px;
+        }
+        
+        pre {
+            background-color: #222222;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #00FF9D;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        .note {
+            background-color: rgba(0, 229, 255, 0.1);
+            padding: 15px;
+            border-left: 4px solid #00E5FF;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Integração do Chatbot Typebot</h1>
+        
+        <p>Este documento contém o código necessário para integrar o chatbot do Typebot ao site da Digita Money.</p>
+        
+        <div class="note">
+            <p><strong>Nota:</strong> Você precisará substituir <code>SEU_URL_DO_TYPEBOT</code> pela URL real do seu bot no Typebot.</p>
+        </div>
+        
+        <h2>Código para Adicionar ao Site</h2>
+        
+        <p>Adicione o seguinte código antes da tag de fechamento <code>&lt;/body&gt;</code> em todas as páginas do site:</p>
+        
+        <pre>
+&lt;!-- Typebot Integration --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@typebot.io/js@0.1/dist/web.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Configuração do Typebot
+        window.Typebot.initBubble({
+            typebot: "SEU_URL_DO_TYPEBOT",
+            theme: {
+                button: {
+                    backgroundColor: "#00E5FF",
+                    iconColor: "#000000"
+                },
+                chat: {
+                    backgroundColor: "#333333",
+                    textColor: "#FFFFFF",
+                    fontSize: 16
+                },
+                previewMessage: {
+                    backgroundColor: "#00E5FF",
+                    textColor: "#000000"
+                }
+            },
+            previewMessage: {
+                message: "Olá! Como posso ajudar você hoje?",
+                autoShowDelay: 5000
+            },
+            buttonPosition: "right",
+            buttonText: "Fale Conosco",
+            buttonIconUrl: "images/chat-icon.svg"
+        });
+        
+        // Integração com o botão de chat existente
+        const chatbotToggle = document.querySelector('.chatbot-toggle');
+        const typebotContainer = document.getElementById('typebot-container');
+        
+        if (chatbotToggle) {
+            chatbotToggle.addEventListener('click', function() {
+                window.Typebot.toggleBubble();
+                chatbotToggle.classList.toggle('active');
+            });
+        }
+    });
+&lt;/script&gt;
+        </pre>
+        
+        <h2>Modificações no CSS</h2>
+        
+        <p>Adicione o seguinte CSS ao seu arquivo <code>style.css</code> para estilizar o botão do chatbot quando estiver ativo:</p>
+        
+        <pre>
+.chatbot-toggle.active {
+    background: linear-gradient(135deg, #00FF9D, #00E5FF);
+    transform: scale(1.1) rotate(45deg);
+}
+
+.chatbot-toggle.active i {
+    transform: rotate(-45deg);
+}
+        </pre>
+        
+        <h2>Instruções de Implementação</h2>
+        
+        <ol>
+            <li>Obtenha a URL do seu bot no Typebot após a publicação</li>
+            <li>Substitua <code>SEU_URL_DO_TYPEBOT</code> pela URL real no código acima</li>
+            <li>Adicione o código antes da tag de fechamento <code>&lt;/body&gt;</code> em todas as páginas</li>
+            <li>Adicione o CSS ao seu arquivo de estilos</li>
+            <li>Teste a integração para garantir que o chatbot está funcionando corretamente</li>
+        </ol>
+        
+        <div class="note">
+            <p><strong>Dica:</strong> Você pode personalizar as cores, mensagens e comportamento do chatbot editando os parâmetros no código acima.</p>
+        </div>
+    </div>
+</body>
+</html>
